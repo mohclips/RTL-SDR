@@ -23,8 +23,6 @@ EOF
 chmod 755 ~/run-rtlsdr_scanner.sh
 
 
-header "done"
-
 sudo tee -a /etc/motd >/dev/null <<EOF
 
 *** RTL SDR Scanner ***
@@ -36,3 +34,4 @@ run  ~/run-rtlsdr_scanner.sh
 
 EOF
 
+header "done"

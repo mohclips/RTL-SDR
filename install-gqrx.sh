@@ -17,9 +17,6 @@ header "add vagrant to audio groups"
 sudo usermod -a -G audio vagrant
 sudo usermod -a -G pulse-access vagrant
 
-# this one command is important to make sure pulseaudio starts properly
-pax11publish -r
-
 sleep 1
 paplay /usr/share/sounds/alsa/Front_Center.wav
 sleep 1
@@ -29,10 +26,13 @@ wget https://github.com/csete/gqrx/releases/download/v2.10/gqrx-sdr-2.10-linux-x
 tar xf gqrx-sdr-2.10-linux-x64.tar.xz 
 ln -s gqrx-sdr-2.10-linux-x64 gqrx
 
-header "done"
 
 cat>>/home/vagrant/run-gqrx.sh<<EOF
 #!/bin/bash
+
+# this one command is important to make sure pulseaudio starts properly
+pax11publish -r
+
 gqrx/gqrx
 EOF
 chmod 755 ~/run-gqrx.sh
@@ -52,3 +52,4 @@ run  ~/run-gqrx.sh
 EOF
 
 
+header "done"
