@@ -10,11 +10,23 @@ Vagrant.configure("2") do |config|
 
   config.ssh.forward_x11 = true
 
+  config.vm.synced_folder "saved-data/", "/saved-data/" 
+
   config.vm.provider "virtualbox" do |vb|
     vb.gui = true
- 
+
     # Customize the amount of memory on the VM:
-    vb.memory = "4096"
+    vb.memory = "8192"
+
+    vb.customize ["modifyvm", :id, "--graphicscontroller", "vboxvga"]
+    vb.customize ["modifyvm", :id, "--vram", "128"]
+    # Enabling the I/O APIC is required for 64-bit guest operating systems, especially Windows Vista;
+    # it is also required if you want to use more than one virtual CPU in a VM.
+    vb.customize ["modifyvm", :id, "--ioapic", "on"]
+    # Enable the use of hardware virtualization extensions (Intel VT-x or AMD-V) in the processor of your host system
+    vb.customize ["modifyvm", :id, "--hwvirtex", "on"]
+    # Enable, if Guest Additions are installed, whether hardware 3D acceleration should be available
+    vb.customize ["modifyvm", :id, "--accelerate3d", "on"]
 
 # VBoxManage  | grep audio
 #    [--audio none|null|oss|alsa|pulse]

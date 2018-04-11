@@ -1,1 +1,3 @@
 .vagrant/*
+saved-data/*
+*.raw
